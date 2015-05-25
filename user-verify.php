@@ -6,8 +6,21 @@ $password = $_POST['password'];
 
 if(verifyUser($conection, $user)) { 
 
-header("Location: user-main.php");
-die();
+    if (verifyPassword($conection, $password)){
+        header("Location: user-main.php");
+        die();
+    } else {
+
+        $msg = mysqli_error($conection);              
+        ?>
+        <p class="text-danger">The password <?= $password ?> isn't exist ! <?= $msg ?></p>
+        <?php
+        }
+        
+    
+    
+//header("Location: user-main.php");
+//die();
     
 } else { 
 $msg = mysqli_error($conection);              
